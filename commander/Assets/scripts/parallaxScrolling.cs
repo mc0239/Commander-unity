@@ -3,12 +3,15 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class parallaxScrolling : MonoBehaviour {
+    public GameObject player;
     public float backgroudSize;
     private Transform cameraTransform;
     private Transform[] layers;
     private float viewzone = 10;
     private int leftIndex;
     private int rightIndex;
+    private float zamikX;
+    private float zacetniX;
 
 	// Use this for initialization
 	void Start () {
@@ -20,6 +23,9 @@ public class parallaxScrolling : MonoBehaviour {
 
         leftIndex = 0;
         rightIndex = layers.Length - 1;
+
+        zamikX = transform.position.x;//gozd
+        zacetniX = player.transform.position.x;//player
 		
 	}
 
@@ -43,6 +49,9 @@ public class parallaxScrolling : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
+        float spremembaX = zacetniX - player.transform.position.x;
+        transform.position = new Vector3(zamikX-spremembaX, transform.position.y, transform.position.z);
+
         if (cameraTransform.position.z < (layers[leftIndex].transform.position.z + viewzone)+backgroudSize)
             scrollLeft();
 
