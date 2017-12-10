@@ -6,10 +6,12 @@ using UnityEngine;
 public class playercontroller : MonoBehaviour {
     public float walkingSpeed = 5f;
     public float jumpForce = 3f;
-    public float gravity = 10f;
+    protected Vector3 gravity = Vector3.zero;
     private Vector3 moveDir = Vector3.zero;
     private CharacterController cc;
     private Vector3 lastRotation=Vector3.zero;
+
+
 	// Use this for initialization
 	void Start () {
         cc = gameObject.GetComponent<CharacterController>();
@@ -18,17 +20,29 @@ public class playercontroller : MonoBehaviour {
 	// Update is called once per frame
 	void Update () {
         moveDir=handleKeyInput();
-        if (cc.isGrounded) {
-            if(!moveDir.Equals(Vector3.zero))transform.rotation = Quaternion.LookRotation(moveDir);
+        if (!moveDir.Equals(Vector3.zero)) transform.rotation = Quaternion.LookRotation(moveDir);
+
+        if (cc.isGrounded)
+        {
+            gravity = new Vector3(0,-2,0);
+
+           
             moveDir = Vector3.Normalize(moveDir);
             moveDir *= walkingSpeed;
-            if (Input.GetButtonDown("Jump")) {
-                moveDir.y = jumpForce;
+            if (Input.GetButtonDown("Jump"))
+            {
+                gravity.y = jumpForce;
             }
+            
 
         }
+        else {
+            moveDir = Vector3.Normalize(moveDir);
+            moveDir *= walkingSpeed/2;
+            gravity += Physics.gravity * Time.deltaTime;
+        }
 
-        moveDir.y -= gravity;
+        moveDir += gravity;
         Debug.Log(moveDir);
         cc.Move(moveDir * Time.deltaTime);
 	}

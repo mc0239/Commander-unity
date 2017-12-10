@@ -232,17 +232,32 @@ Prefab:
     - target: {fileID: 114888887217829570, guid: 984f44ce428d2094b8123dbaa4ef467f,
         type: 2}
       propertyPath: gravity
-      value: 10
+      value: 200
       objectReference: {fileID: 0}
     - target: {fileID: 114888887217829570, guid: 984f44ce428d2094b8123dbaa4ef467f,
         type: 2}
       propertyPath: walkingSpeed
-      value: 7
+      value: 6
       objectReference: {fileID: 0}
     - target: {fileID: 114888887217829570, guid: 984f44ce428d2094b8123dbaa4ef467f,
         type: 2}
       propertyPath: jumpForce
-      value: 30
+      value: 9
+      objectReference: {fileID: 0}
+    - target: {fileID: 143617608672012954, guid: 984f44ce428d2094b8123dbaa4ef467f,
+        type: 2}
+      propertyPath: m_SkinWidth
+      value: 0.05
+      objectReference: {fileID: 0}
+    - target: {fileID: 143617608672012954, guid: 984f44ce428d2094b8123dbaa4ef467f,
+        type: 2}
+      propertyPath: m_SlopeLimit
+      value: 20
+      objectReference: {fileID: 0}
+    - target: {fileID: 143617608672012954, guid: 984f44ce428d2094b8123dbaa4ef467f,
+        type: 2}
+      propertyPath: m_Center.y
+      value: -2.1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 984f44ce428d2094b8123dbaa4ef467f, type: 2}
@@ -1142,8 +1157,8 @@ Light:
   m_Enabled: 1
   serializedVersion: 8
   m_Type: 1
-  m_Color: {r: 1, g: 0.95686275, b: 0.8392157, a: 1}
-  m_Intensity: 1
+  m_Color: {r: 1, g: 0.80689657, b: 0, a: 1}
+  m_Intensity: 0.8
   m_Range: 10
   m_SpotAngle: 30
   m_CookieSize: 10
@@ -1152,9 +1167,9 @@ Light:
     m_Resolution: -1
     m_CustomResolution: -1
     m_Strength: 1
-    m_Bias: 0.05
-    m_NormalBias: 0.4
-    m_NearPlane: 0.2
+    m_Bias: 0
+    m_NormalBias: 0.21
+    m_NearPlane: 0.52
   m_Cookie: {fileID: 0}
   m_DrawHalo: 0
   m_Flare: {fileID: 0}
@@ -1175,13 +1190,13 @@ Transform:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1858628296}
-  m_LocalRotation: {x: 0.40821788, y: -0.23456968, z: 0.10938163, w: 0.8754261}
+  m_LocalRotation: {x: -0.47321528, y: -0.31931564, z: 0.7550876, w: 0.32240906}
   m_LocalPosition: {x: 0, y: 3, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 2
-  m_LocalEulerAnglesHint: {x: 50, y: -30, z: 0}
+  m_LocalEulerAnglesHint: {x: 10.2, y: -69.28, z: 126.7}
 --- !u!1 &1912865363
 GameObject:
   m_ObjectHideFlags: 0
