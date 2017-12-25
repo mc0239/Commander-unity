@@ -1,13 +1,14 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
-public class gameManager : MonoBehaviour {
-
+public class GameManager : MonoBehaviour {
 
     public void LoadLevel()
     {
-        Application.LoadLevel("level_1");
+        SceneManager.LoadScene("level_1");
     }
+    
 }

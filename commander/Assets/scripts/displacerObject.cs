@@ -1,16 +1,18 @@
-﻿using System.Collections;
-using System.Collections.Generic;
+﻿using System;
 using UnityEngine;
 
-public class displacerObject : MonoBehaviour {
+public class DisplacerObject : MonoBehaviour {
+	
+	// Do NOT delete this class as it's used in Player Controller!
 
 	// Use this for initialization
-	void Start () {
-		
+	void Start ()
+	{
 	}
 	
 	// Update is called once per frame
 	void Update () {
 		
 	}
+	
 }

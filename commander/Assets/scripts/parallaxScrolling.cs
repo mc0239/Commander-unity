@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class parallaxScrolling : MonoBehaviour {
+public class ParallaxScrolling : MonoBehaviour {
     public GameObject player;
     public float backgroudSize;
     private Transform cameraTransform;
