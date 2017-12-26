@@ -20,3 +20,8 @@ Unity je **zelo občutljiv** glede imen skrpit, vključno z **razlikami v veliki
 Imel sem neke težave z MonoDevelopom (ni zaznal razreda UnityEngine in druge Unity-related razrede). Compile v Unityu je delal ok, sam v MonoDevelopu nisem imel Autocomplete-a in ostalih funkcij.
 
 Težave mi ni uspelo rešit zato sem si poinštaliral JetBrains Rider (brezplačen z Educational licenco), ki pa dela ok.
+
+### Blender
+
+V primeru, da so **vsi modeli "nevidni", ko odpreš sceno**, zelo verjetno v konzolo dobiš napako `Blender could not be found.
+Make sure that Blender is installed and the .blend file has Blender as its 'Open with' application!`. Poinštaliraj blender, ponovno odpri Unity in naredi `Glavni meni -> Assets -> Reimport All`.
