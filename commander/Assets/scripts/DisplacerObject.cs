@@ -14,5 +14,9 @@ public class DisplacerObject : MonoBehaviour {
 	void Update () {
 		
 	}
-	
+
+	private void OnTriggerEnter(Collider other)
+	{
+		Debug.Log("COOLIE!");
+	}
 }

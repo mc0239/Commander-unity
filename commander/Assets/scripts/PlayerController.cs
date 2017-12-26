@@ -78,6 +78,15 @@ public class PlayerController : MonoBehaviour {
 		}
 	}
 
+	private void OnTriggerEnter(Collider other)
+	{
+		if (other.GetComponent(typeof(DisplacerCornerObject)) != null)
+		{
+			if(_movementAxis == 2) DisplaceAction(transform.position, 0);
+			else if(_movementAxis == 0) DisplaceAction(transform.position, 2);
+		}
+	}
+
 	private void DisplaceAction(Vector3 displacePosition, int displaceAxis)
 	{
 		// reset any currently ongoing movement
