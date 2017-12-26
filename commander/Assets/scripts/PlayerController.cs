@@ -77,10 +77,10 @@ public class PlayerController : MonoBehaviour {
 		switch (_movementAxis)
 		{
 			case 2:
-				iTween.RotateTo(gameObject, new Vector3(0, 0, 0), 2);
+				transform.RotateAround(transform.position, Vector3.up, -90);
 				break;
 			case 0:
-				iTween.RotateTo(gameObject, new Vector3(0, 90, 0), 2);
+				transform.RotateAround(transform.position, Vector3.up, 90);
 				break;
 			default:
 				Debug.LogError("newAxis argument must be 0 or 2!");
@@ -98,11 +98,11 @@ public class PlayerController : MonoBehaviour {
 		if (displaceAxis == 0)
 		{
 			if (mtl == 0) mtl = -1;
-			//_po.transform.rotation = Quaternion.AngleAxis(-90 * mtl, Vector3.up);
+			_po.transform.rotation = Quaternion.AngleAxis(-90 * mtl, Vector3.up);
 		}
 		else if (displaceAxis == 2)
 		{
-			//_po.transform.rotation = Quaternion.AngleAxis(180 * mtl, Vector3.up);
+			_po.transform.rotation = Quaternion.AngleAxis(180 * mtl, Vector3.up);
 		}
 		else
 		{
