@@ -24,4 +24,4 @@ Težave mi ni uspelo rešit zato sem si poinštaliral JetBrains Rider (brezplač
 ### Blender
 
 V primeru, da so **vsi modeli "nevidni", ko odpreš sceno**, zelo verjetno v konzolo dobiš napako `Blender could not be found.
-Make sure that Blender is installed and the .blend file has Blender as its 'Open with' application!`. Poinštaliraj blender in še enkrat odpri projekt.
+Make sure that Blender is installed and the .blend file has Blender as its 'Open with' application!`. Poinštaliraj blender, ponovno odpri Unity in naredi `Glavni meni -> Assets -> Reimport All`.
