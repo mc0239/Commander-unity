@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class PlayerController : MonoBehaviour {
     public float MoveSpeed = 7f;
-	public float JumpForce = 18f;
+	public float JumpForce = 15f;
 	public float Gravity = 6f;
 
 	private int _movementAxis = 2; // by default, move by Z axis
@@ -46,64 +46,50 @@ public class PlayerController : MonoBehaviour {
 		{
 			// if we are moving to left (negative movement axis value)
 			bool isMovingLeft = (_movement[_movementAxis] < 0);
-			RotateByAxis(isMovingLeft, _movementAxis);			
+			RotatePlayerModelByAxis(isMovingLeft, _movementAxis);			
 		}
 	}
 
 	private void OnTriggerStay(Collider other)
 	{
 		// if other object is DisplacerObject 
-		if (other.GetComponentInParent(typeof(DisplacerObject)) != null)
+		if (other.GetComponentInParent(typeof(RotatorObject)) != null)
 		{
-			Transform displacerObject = other.gameObject.transform.parent;
-			Transform target = displacerObject.Find("TargetArea");
-			Transform source = displacerObject.Find("SourceArea");
-			
-			// If we are on source path (moving on Z axis) and inside SourceArea, we can press Fire3 (Left Shift) to
-			// move into target path (moving on X axis).
-			if (_movementAxis == 2 && other.transform.Equals(source))
+			if (Input.GetButtonDown("Fire3"))
 			{
-				if (Input.GetButtonDown("Fire3"))
-				{
-					DisplaceAction(target.GetComponent<BoxCollider>().bounds.center, 0);
-				}
+				Vector3 cPos = other.bounds.center;
+				if (_movementAxis == 2) PerformAxisRotation(cPos, 0);
+				else if(_movementAxis == 0) PerformAxisRotation(cPos, 2);
 			}
-			// If we are on target path (moving on X axis) and we touch SourceArea, we automatically jump back into
-			// source path (moving on Z axis).
-			else if (_movementAxis == 0 && other.transform.Equals(source))
-			{
-				DisplaceAction(source.GetComponent<BoxCollider>().bounds.center, 2); // start moving on Z axis
-			}
-			
 		}
 	}
 
-	private void OnTriggerEnter(Collider other)
+	private void PerformAxisRotation(Vector3 rotatorPosition, int newAxis)
 	{
-		if (other.GetComponent(typeof(DisplacerCornerObject)) != null)
-		{
-			if(_movementAxis == 2) DisplaceAction(transform.position, 0);
-			else if(_movementAxis == 0) DisplaceAction(transform.position, 2);
-		}
-	}
-
-	private void DisplaceAction(Vector3 displacePosition, int displaceAxis)
-	{
+		Debug.Log("New movement axis: " + newAxis);
 		// reset any currently ongoing movement
 		_movement.x = 0;
 		_movement.z = 0;
-		// set position and new movement axis
-		transform.position = displacePosition;
-		_movementAxis = displaceAxis;
+		// set movement axis and reset position to center
+		transform.position = rotatorPosition;
+		_movementAxis = newAxis;
 		// rotate camera
-		if(displaceAxis == 2)
-			transform.RotateAround(transform.position, Vector3.up, -90);
-		else if(displaceAxis == 0)
-			transform.RotateAround(transform.position, Vector3.up, +90);
+		switch (_movementAxis)
+		{
+			case 2:
+				iTween.RotateTo(gameObject, new Vector3(0, 0, 0), 2);
+				break;
+			case 0:
+				iTween.RotateTo(gameObject, new Vector3(0, 90, 0), 2);
+				break;
+			default:
+				Debug.LogError("newAxis argument must be 0 or 2!");
+				break;
+		}
 	}
 
 	// Rotate player object depending on left/right movement and displacement axis (if we are moving on Z or on X)
-	private void RotateByAxis(bool movingToLeft, int displaceAxis)
+	private void RotatePlayerModelByAxis(bool movingToLeft, int displaceAxis)
 	{
 		int mtl;
 		if (movingToLeft) mtl = 1;
@@ -112,15 +98,16 @@ public class PlayerController : MonoBehaviour {
 		if (displaceAxis == 0)
 		{
 			if (mtl == 0) mtl = -1;
-			_po.transform.rotation = Quaternion.AngleAxis(-90 * mtl, Vector3.up);
+			//_po.transform.rotation = Quaternion.AngleAxis(-90 * mtl, Vector3.up);
 		}
 		else if (displaceAxis == 2)
 		{
-			_po.transform.rotation = Quaternion.AngleAxis(180 * mtl, Vector3.up);
+			//_po.transform.rotation = Quaternion.AngleAxis(180 * mtl, Vector3.up);
 		}
 		else
 		{
 			Debug.Log("Invalid displaceAxis specified.");
 		}
 	}
+	
 }

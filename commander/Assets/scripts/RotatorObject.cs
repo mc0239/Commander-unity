@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class DisplacerCornerObject : MonoBehaviour {
+public class RotatorObject : MonoBehaviour {
 
 	// Use this for initialization
 	void Start () {
