@@ -27,6 +27,13 @@ public class PlayerController : MonoBehaviour {
 		moveDirection *= MoveSpeed;
 		_movement.x = moveDirection.x;
 		_movement.z = moveDirection.z;
+		
+		// Restrict x movement between -5 and +5
+		if (_cc.transform.position.x > +5 && _movement.x > 0) _movement.x = 0;
+		if (_cc.transform.position.x < -5 && _movement.x < 0) _movement.x = 0;
+		
+		// Kill player if it falls off
+		if(_cc.transform.position.y < -20) PlayerKill();
 
 		// Apply gravity if we are in the air
 		if (!_cc.isGrounded) {
@@ -50,5 +57,10 @@ public class PlayerController : MonoBehaviour {
 	private Vector3 handleKeyInput()
 	{
 		return Vector3.Normalize(new Vector3(-Input.GetAxis("Vertical"), 0, Input.GetAxis("Horizontal")));
+	}
+
+	public void PlayerKill()
+	{
+		_cc.transform.position = Vector3.zero;
 	}
 }
