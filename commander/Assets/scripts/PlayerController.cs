@@ -1,6 +1,8 @@
 ﻿using System;
 using System.Runtime.InteropServices.ComTypes;
 using UnityEngine;
+using UnityEngine.Networking.NetworkSystem;
+using UnityEngine.UI;
 
 public class PlayerController : MonoBehaviour {
     public float MoveSpeed = 7f;
@@ -10,6 +12,7 @@ public class PlayerController : MonoBehaviour {
 	private Vector3 _movement = Vector3.zero;
 
 	private CharacterController _cc;
+	private Camera _oc;
 	private Transform _po;
 
 	// Use this for initialization
@@ -17,10 +20,35 @@ public class PlayerController : MonoBehaviour {
 	{
         _cc = GetComponent<CharacterController> ();
 		_po = transform.Find("PlayerObject");
+		_oc = transform.Find("OverviewCamera").GetComponent<Camera>();
 	}
 
 	// Update is called once per frame
 	void Update ()
+	{
+		MovePlayer();
+		
+		// Kill player if it falls off
+		if(_cc.transform.position.y < -20) PlayerKill();
+		
+		// If key for map is held, show overview camera
+		if (Input.GetButton("Map"))
+		{
+			_oc.enabled = true;
+		}
+		else
+		{
+			_oc.enabled = false;
+		}
+		
+	}
+	
+	private Vector3 handleKeyInput()
+	{
+		return Vector3.Normalize(new Vector3(-Input.GetAxis("Vertical"), 0, Input.GetAxis("Horizontal")));
+	}
+
+	private void MovePlayer()
 	{
 		// Move on the given movement axis
 		Vector3 moveDirection = handleKeyInput();
@@ -32,9 +60,6 @@ public class PlayerController : MonoBehaviour {
 		if (_cc.transform.position.x > +5 && _movement.x > 0) _movement.x = 0;
 		if (_cc.transform.position.x < -5 && _movement.x < 0) _movement.x = 0;
 		
-		// Kill player if it falls off
-		if(_cc.transform.position.y < -20) PlayerKill();
-
 		// Apply gravity if we are in the air
 		if (!_cc.isGrounded) {
 			_movement.y -= Gravity / 10;
@@ -49,14 +74,10 @@ public class PlayerController : MonoBehaviour {
 		_cc.Move(_movement * Time.deltaTime);
 
 		// Apply rotation if we are moving by at least the threshold below
-		float thr = 0.05f;
+		const float thr = 0.05f;
 		if(Math.Abs(moveDirection.z) > thr || Math.Abs(moveDirection.x) > thr)
-		_po.transform.rotation = Quaternion.LookRotation(moveDirection);
-	}
-	
-	private Vector3 handleKeyInput()
-	{
-		return Vector3.Normalize(new Vector3(-Input.GetAxis("Vertical"), 0, Input.GetAxis("Horizontal")));
+			_po.transform.rotation = Quaternion.LookRotation(moveDirection);
+		
 	}
 
 	public void PlayerKill()
