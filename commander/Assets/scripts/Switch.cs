@@ -3,7 +3,7 @@ using UnityEngine;
 
 public class Switch : MonoBehaviour
 {
-	public Boolean SwitchState = false;
+	public bool SwitchState = false;
 	public Material MaterialOn;
 	public Material MaterialOff;
 	public GameObject Gate;
