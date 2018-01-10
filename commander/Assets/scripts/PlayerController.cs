@@ -17,6 +17,7 @@ public class PlayerController : MonoBehaviour {
 	private Transform _po;
 
 	public int Score = 0;
+	public bool HasKey = false;
 
 	// Use this for initialization
 	void Start ()
@@ -103,7 +104,11 @@ public class PlayerController : MonoBehaviour {
 		{
 			other.gameObject.SetActive(false);
 			Score += 100;
-		} else if (other.GetComponent<Spikes>())
+		} else if (other.GetComponent<Key>())
+		{
+			HasKey = true;
+			other.gameObject.SetActive(false);
+		}else if (other.GetComponent<Spikes>())
 		{
 			PlayerKill();
 		}
