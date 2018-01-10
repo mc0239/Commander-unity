@@ -64,8 +64,13 @@ public class PlayerController : MonoBehaviour {
 		if (_cc.transform.position.x < -5 && _movement.x < 0) _movement.x = 0;
 		
 		// Apply gravity if we are in the air
-		if (!_cc.isGrounded) {
+		if (!_cc.isGrounded)
+		{
 			_movement.y -= Gravity / 10;
+		}
+		else
+		{
+			_movement.y = -5;
 		}
 
 		// Apply jump force on jump click
@@ -98,7 +103,7 @@ public class PlayerController : MonoBehaviour {
 		{
 			other.gameObject.SetActive(false);
 			Score += 100;
-		} else if (other.transform.Find("SpikesCollider"))
+		} else if (other.GetComponent<Spikes>())
 		{
 			PlayerKill();
 		}
