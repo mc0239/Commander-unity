@@ -2,6 +2,7 @@
 using System.Runtime.InteropServices.ComTypes;
 using UnityEngine;
 using UnityEngine.Networking.NetworkSystem;
+using UnityEngine.SocialPlatforms.Impl;
 using UnityEngine.UI;
 
 public class PlayerController : MonoBehaviour {
@@ -14,6 +15,8 @@ public class PlayerController : MonoBehaviour {
 	private CharacterController _cc;
 	private Camera _oc;
 	private Transform _po;
+
+	public int Score = 0;
 
 	// Use this for initialization
 	void Start ()
@@ -83,5 +86,21 @@ public class PlayerController : MonoBehaviour {
 	public void PlayerKill()
 	{
 		_cc.transform.position = Vector3.zero;
+	}
+
+	private void OnTriggerEnter(Collider other)
+	{
+		if (other.GetComponent<Switch>())
+		{
+			Switch s = other.GetComponent<Switch>();
+			s.TurnSwitch();
+		} else if (other.GetComponent<Banana>())
+		{
+			other.gameObject.SetActive(false);
+			Score += 100;
+		} else if (other.transform.Find("SpikesCollider"))
+		{
+			PlayerKill();
+		}
 	}
 }
