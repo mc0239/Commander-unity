@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Runtime.InteropServices.ComTypes;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -16,19 +17,21 @@ public class PlayerController : MonoBehaviour {
 	public int Score = 0;
 	public bool HasKey = false;
 
+	private Animator _anim;
+
 	// Use this for initialization
 	void Start ()
 	{
         _cc = GetComponent<CharacterController> ();
 		_po = transform.Find("PlayerObject");
 		_oc = transform.Find("OverviewCamera").GetComponent<Camera>();
+		_anim = _po.GetComponent<Animator>();
 	}
 
 	// Update is called once per frame
 	void Update ()
 	{
 		MovePlayer();
-		
 		// Kill player if it falls off
 		if(_cc.transform.position.y < -20) PlayerKill();
 		
@@ -57,6 +60,8 @@ public class PlayerController : MonoBehaviour {
 		_movement.x = moveDirection.x;
 		_movement.z = moveDirection.z;
 		
+		_anim.SetFloat("Speed", moveDirection.magnitude);
+		
 		// Restrict x movement between -5 and +5
 		if (_cc.transform.position.x > +5 && _movement.x > 0) _movement.x = 0;
 		if (_cc.transform.position.x < -5 && _movement.x < 0) _movement.x = 0;
@@ -72,8 +77,20 @@ public class PlayerController : MonoBehaviour {
 		}
 
 		// Apply jump force on jump click
-		if (Input.GetButton("Jump") && _cc.isGrounded) {
-			_movement.y = JumpForce;
+		if (_cc.isGrounded)
+		{
+			_anim.SetTrigger("Grounded");
+			_anim.ResetTrigger("Jump");
+			if (Input.GetButton("Jump"))
+			{
+				_anim.SetTrigger("Jump");
+
+				_movement.y = JumpForce;
+			}
+		}
+		else
+		{
+			_anim.ResetTrigger("Grounded");
 		}
 
 		// Apply all calculated movements above
