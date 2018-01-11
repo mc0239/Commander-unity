@@ -1,13 +1,9 @@
 ﻿using System;
-using System.Net.Configuration;
-using System.Runtime.InteropServices.ComTypes;
 using UnityEngine;
-using UnityEngine.Networking.NetworkSystem;
-using UnityEngine.SocialPlatforms.Impl;
 using UnityEngine.UI;
 
 public class PlayerController : MonoBehaviour {
-    public float MoveSpeed = 7f;
+    public float MoveSpeed = 7.5f;
 	public float JumpForce = 15f;
 	public float Gravity = 6f;
 
@@ -19,8 +15,6 @@ public class PlayerController : MonoBehaviour {
 
 	public int Score = 0;
 	public bool HasKey = false;
-	
-	int BananaScore = 100;
 
 	// Use this for initialization
 	void Start ()
@@ -103,12 +97,13 @@ public class PlayerController : MonoBehaviour {
 		{
 			Switch s = other.GetComponent<Switch>();
 			s.TurnSwitch();
-		} else if (other.GetComponent<Banana>())
+		} else if (other.GetComponent<Pickup>())
 		{
 			other.gameObject.SetActive(false);
-			Score += BananaScore;
+			int giveScore = other.GetComponent<Pickup>().ScoreAmount;
+			Score += giveScore;
 			GameObject.Find("Score").GetComponent<Score>().setScore(Score);
-			GameObject.Find("OnPickup").GetComponent<Text>().text = "+" + BananaScore;
+			GameObject.Find("OnPickup").GetComponent<Text>().text = "+" + giveScore;
 			GameObject.Find("OnPickup").GetComponent<Animator>().Play("Pickup");
 		} else if (other.GetComponent<Key>())
 		{
@@ -117,9 +112,12 @@ public class PlayerController : MonoBehaviour {
 			GameObject.Find("HasKeyUI").GetComponent<Animator>().Play("HasKey");
 			GameObject.Find("OnPickup").GetComponent<Text>().text = "You have the Key";
 			GameObject.Find("OnPickup").GetComponent<Animator>().Play("Pickup");
-		}else if (other.GetComponent<Spikes>())
+		} else if (other.GetComponent<Spikes>())
 		{
 			PlayerKill();
+		} else if (other.GetComponent<Door>())
+		{
+			
 		}
 	}
 }
