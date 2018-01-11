@@ -114,6 +114,8 @@ public class PlayerController : MonoBehaviour {
 		{
 			HasKey = true;
 			other.gameObject.SetActive(false);
+			GameObject.Find("NotHasKeyUI").SetActive(false);
+			GameObject.Find("HasKeyUI").GetComponent<Animator>().Play("HasKey");
 		}else if (other.GetComponent<Spikes>())
 		{
 			PlayerKill();
