@@ -114,8 +114,9 @@ public class PlayerController : MonoBehaviour {
 		{
 			HasKey = true;
 			other.gameObject.SetActive(false);
-			GameObject.Find("NotHasKeyUI").SetActive(false);
 			GameObject.Find("HasKeyUI").GetComponent<Animator>().Play("HasKey");
+			GameObject.Find("OnPickup").GetComponent<Text>().text = "You have the Key";
+			GameObject.Find("OnPickup").GetComponent<Animator>().Play("Pickup");
 		}else if (other.GetComponent<Spikes>())
 		{
 			PlayerKill();
