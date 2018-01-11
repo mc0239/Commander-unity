@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Net.Configuration;
 using System.Runtime.InteropServices.ComTypes;
 using UnityEngine;
 using UnityEngine.Networking.NetworkSystem;
@@ -18,6 +19,8 @@ public class PlayerController : MonoBehaviour {
 
 	public int Score = 0;
 	public bool HasKey = false;
+	
+	int BananaScore = 100;
 
 	// Use this for initialization
 	void Start ()
@@ -103,8 +106,10 @@ public class PlayerController : MonoBehaviour {
 		} else if (other.GetComponent<Banana>())
 		{
 			other.gameObject.SetActive(false);
-			Score += 100;
+			Score += BananaScore;
 			GameObject.Find("Score").GetComponent<Score>().setScore(Score);
+			GameObject.Find("OnPickup").GetComponent<Text>().text = "+" + BananaScore;
+			GameObject.Find("OnPickup").GetComponent<Animator>().Play("Pickup");
 		} else if (other.GetComponent<Key>())
 		{
 			HasKey = true;
