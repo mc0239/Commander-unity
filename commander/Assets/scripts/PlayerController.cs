@@ -104,6 +104,7 @@ public class PlayerController : MonoBehaviour {
 		{
 			other.gameObject.SetActive(false);
 			Score += 100;
+			GameObject.Find("Score").GetComponent<Score>().setScore(Score);
 		} else if (other.GetComponent<Key>())
 		{
 			HasKey = true;
