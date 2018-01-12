@@ -8,6 +8,11 @@ public class Menu : MonoBehaviour {
 		SceneManager.LoadScene("level_1");
 	}
 	
+	public void Controls()
+	{
+		SceneManager.LoadScene("controls");
+	}
+	
 	public void Credits()
 	{
 		SceneManager.LoadScene("credits");
