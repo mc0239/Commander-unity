@@ -870,7 +870,9 @@ MonoBehaviour:
 
     X
 
-    Tab'
+    Tab
+
+    Escape'
 --- !u!222 &1736879630
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -950,7 +952,9 @@ MonoBehaviour:
 
     Shoot
 
-    Map'
+    Map
+
+    Pause'
 --- !u!222 &1944373936
 CanvasRenderer:
   m_ObjectHideFlags: 0
