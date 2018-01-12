@@ -121,14 +121,14 @@ public class PlayerController : MonoBehaviour {
 			Score += giveScore;
 			GameObject.Find("Score").GetComponent<Score>().setScore(Score);
 			GameObject.Find("OnPickup").GetComponent<Text>().text = "+" + giveScore;
-			GameObject.Find("OnPickup").GetComponent<Animator>().Play("Pickup");
+			GameObject.Find("OnPickup").GetComponent<Animator>().Play("Pickup", -1, 0f);
 		} else if (other.GetComponent<Key>())
 		{
 			HasKey = true;
 			other.gameObject.SetActive(false);
 			GameObject.Find("HasKeyUI").GetComponent<Animator>().Play("HasKey");
 			GameObject.Find("OnPickup").GetComponent<Text>().text = "You have the Key";
-			GameObject.Find("OnPickup").GetComponent<Animator>().Play("Pickup");
+			GameObject.Find("OnPickup").GetComponent<Animator>().Play("Pickup", -1, 0f);
 		} else if (other.GetComponent<Spikes>())
 		{
 			PlayerKill();
