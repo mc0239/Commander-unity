@@ -139,7 +139,7 @@ public class PlayerController : MonoBehaviour {
 				GameObject.Find("OnPickup").GetComponent<Animator>().Play("Pickup", -1, 0f);
 			}
 		}
-		else if (other.GetComponent<BlueBall>())
+		else if (other.GetComponent<ZogaModraController>())
 		{
 			GameObject.Find("GameManager").GetComponent<GameManager>().DeathMsg("by a nasty case of blue balls");
 		}
