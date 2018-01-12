@@ -20,12 +20,12 @@ public class GameManager : MonoBehaviour
     {
         if (Input.GetButtonDown("Pause"))
         {
-            if (!_paused)
+            if (!_paused && Time.timeScale>0.5f)
             {
                 Pause();
                 _paused = true;
             }
-            else
+            else if(_paused)
             {
                 Unpause();
                 _paused = false;
@@ -52,19 +52,19 @@ public class GameManager : MonoBehaviour
         int Score = Int32.Parse(GameObject.Find("Score").GetComponent<Text>().text);
         int Bullets = Int32.Parse(GameObject.Find("Bullets").GetComponent<Text>().text);
         scoreText.text = Score + "\n" + Bullets;
-        totalText.text = (Score + Bullets * 10).ToString();
+        totalText.text = (Score + Bullets * 100).ToString();
         winMsg.SetActive(true);
     }
     
     public void DeathMsg(string message)
     {
+        Time.timeScale = 0.1f;
         if (!_playerDied)
         {
-            Time.timeScale = (float) 0.1;
             _playerDied = true;
             msgText.text = message;
             deathMsg.SetActive(true);
-            Invoke("ResetPlayer", (float)0.25);
+            Invoke("ResetPlayer", 0.25f);
         }
        
     }
