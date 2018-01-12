@@ -23,12 +23,10 @@ public class GameManager : MonoBehaviour
             if (!_paused && Time.timeScale>0.5f)
             {
                 Pause();
-                _paused = true;
             }
             else if(_paused)
             {
                 Unpause();
-                _paused = false;
             }
         }
     }
@@ -36,6 +34,7 @@ public class GameManager : MonoBehaviour
     public void Pause()
     {
         Time.timeScale = 0;
+        _paused = true;
         pauseMenu.SetActive(true);
     }
 
@@ -43,6 +42,7 @@ public class GameManager : MonoBehaviour
     {
         Time.timeScale = 1;
         pauseMenu.SetActive(false);
+        _paused = false;
     }
 
     public void WinMsg()
