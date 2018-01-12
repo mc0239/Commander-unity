@@ -131,7 +131,8 @@ public class PlayerController : MonoBehaviour {
 		{
 			if (HasKey)
 			{
-				GameObject.Find("GameManager").GetComponent<GameManager>().WinMsg();
+				GameObject.Find("vrataopen").GetComponent<Animator>().Play("Blend Tree");
+				Invoke("EndGame", 3f);
 			}
 			else
 			{
@@ -143,5 +144,10 @@ public class PlayerController : MonoBehaviour {
 		{
 			GameObject.Find("GameManager").GetComponent<GameManager>().DeathMsg("by a nasty case of blue balls");
 		}
+	}
+
+	private void EndGame()
+	{
+		GameObject.Find("GameManager").GetComponent<GameManager>().WinMsg();
 	}
 }
