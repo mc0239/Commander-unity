@@ -12,7 +12,7 @@ public class GameManager : MonoBehaviour
     public GameObject winMsg;
     public GameObject deathMsg;
     public Text msgText;
-    public Text scoreText;
+    //public Text scoreText;
     public Text totalText;
     public GameObject player;
         
@@ -49,10 +49,10 @@ public class GameManager : MonoBehaviour
     {
         Time.timeScale = 0;
         
-        int Score = Int32.Parse(GameObject.Find("Score").GetComponent<Text>().text);
-        int Bullets = Int32.Parse(GameObject.Find("Bullets").GetComponent<Text>().text);
-        scoreText.text = Score + "\n" + Bullets;
-        totalText.text = (Score + Bullets * 100).ToString();
+        //int Score = Int32.Parse(GameObject.Find("Score").GetComponent<Text>().text);
+        //int Bullets = Int32.Parse(GameObject.Find("Bullets").GetComponent<Text>().text);
+        //scoreText.text = Score + "\n" + Bullets;
+        totalText.text = GameObject.Find("Score").GetComponent<Text>().text;
         winMsg.SetActive(true);
     }
     
