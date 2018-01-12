@@ -256,7 +256,7 @@ RectTransform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 463112716}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 310, y: 336, z: 0}
+  m_LocalPosition: {x: 387.5, y: 336, z: 0}
   m_LocalScale: {x: 1.12, y: 1.12, z: 1.12}
   m_Children:
   - {fileID: 1292815637}
@@ -868,8 +868,6 @@ MonoBehaviour:
 
     Space
 
-    X
-
     Tab
 
     Escape'
@@ -949,8 +947,6 @@ MonoBehaviour:
   m_Text: 'Move
 
     Jump
-
-    Shoot
 
     Map
 
