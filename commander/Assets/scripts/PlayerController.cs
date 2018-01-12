@@ -122,14 +122,22 @@ public class PlayerController : MonoBehaviour {
 			HasKey = true;
 			other.gameObject.SetActive(false);
 			GameObject.Find("HasKeyUI").GetComponent<Animator>().Play("HasKey");
-			GameObject.Find("OnPickup").GetComponent<Text>().text = "You have the Key";
+			GameObject.Find("OnPickup").GetComponent<Text>().text = "Found the Key";
 			GameObject.Find("OnPickup").GetComponent<Animator>().Play("Pickup", -1, 0f);
 		} else if (other.GetComponent<Spikes>())
 		{
 			GameObject.Find("GameManager").GetComponent<GameManager>().DeathMsg("in a prickly pit of pointy spikes");
 		} else if (other.GetComponent<Door>())
 		{
-			
+			if (HasKey)
+			{
+				GameObject.Find("GameManager").GetComponent<GameManager>().WinMsg();
+			}
+			else
+			{
+				GameObject.Find("OnPickup").GetComponent<Text>().text = "You don't have the Key";
+				GameObject.Find("OnPickup").GetComponent<Animator>().Play("Pickup", -1, 0f);
+			}
 		}
 	}
 }

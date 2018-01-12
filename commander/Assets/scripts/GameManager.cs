@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using System;
+using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
@@ -8,8 +9,11 @@ public class GameManager : MonoBehaviour
     private bool _playerDied = false;
 
     public GameObject pauseMenu;
+    public GameObject winMsg;
     public GameObject deathMsg;
-    public GameObject msgText;
+    public Text msgText;
+    public Text scoreText;
+    public Text totalText;
     public GameObject player;
         
     void Update()
@@ -40,21 +44,34 @@ public class GameManager : MonoBehaviour
         Time.timeScale = 1;
         pauseMenu.SetActive(false);
     }
+
+    public void WinMsg()
+    {
+        Time.timeScale = 0;
+        
+        int Score = Int32.Parse(GameObject.Find("Score").GetComponent<Text>().text);
+        int Bullets = Int32.Parse(GameObject.Find("Bullets").GetComponent<Text>().text);
+        scoreText.text = Score + "\n" + Bullets;
+        totalText.text = (Score + Bullets * 10).ToString();
+        winMsg.SetActive(true);
+    }
     
     public void DeathMsg(string message)
     {
         if (!_playerDied)
         {
+            Time.timeScale = (float) 0.1;
             _playerDied = true;
-            msgText.GetComponent<Text>().text = message;
+            msgText.text = message;
             deathMsg.SetActive(true);
-            Invoke("ResetPlayer", 2f);
+            Invoke("ResetPlayer", (float)0.25);
         }
        
     }
 
     public void ResetPlayer()
     {
+        Time.timeScale = 1;
         deathMsg.SetActive(false);
         _playerDied = false;
         player.transform.position = Vector3.zero;
