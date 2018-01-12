@@ -1,7 +1,7 @@
 # Commander-unity
 
 ## Latest build
-Zadnji WebGl build je na voljo v mapi `buildkeen15_web`
+Zadnji WebGl build je na voljo v mapi `buildkeen15_web` in na naslovu https://iamsilver.net/Commander-unity
 
 ## Delo na projektu
 
