@@ -1,30 +1,35 @@
 ﻿using UnityEngine;
 using UnityEngine.SceneManagement;
+using UnityEngine.UI;
 
 public class GameManager : MonoBehaviour
 {
-    bool Paused = false;
+    private bool _paused = false;
+    private bool _playerDied = false;
 
     public GameObject pauseMenu;
+    public GameObject deathMsg;
+    public GameObject msgText;
+    public GameObject player;
         
     void Update()
     {
         if (Input.GetButtonDown("Pause"))
         {
-            if (!Paused)
+            if (!_paused)
             {
                 Pause();
-                Paused = true;
+                _paused = true;
             }
             else
             {
                 Unpause();
-                Paused = false;
+                _paused = false;
             }
         }
     }
 
-    void Pause()
+    public void Pause()
     {
         Time.timeScale = 0;
         pauseMenu.SetActive(true);
@@ -34,6 +39,25 @@ public class GameManager : MonoBehaviour
     {
         Time.timeScale = 1;
         pauseMenu.SetActive(false);
+    }
+    
+    public void DeathMsg(string message)
+    {
+        if (!_playerDied)
+        {
+            _playerDied = true;
+            msgText.GetComponent<Text>().text = message;
+            deathMsg.SetActive(true);
+            Invoke("ResetPlayer", 2f);
+        }
+       
+    }
+
+    public void ResetPlayer()
+    {
+        deathMsg.SetActive(false);
+        _playerDied = false;
+        player.transform.position = Vector3.zero;
     }
     
     public void RestartGame()

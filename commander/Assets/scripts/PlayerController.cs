@@ -33,7 +33,7 @@ public class PlayerController : MonoBehaviour {
 	{
 		MovePlayer();
 		// Kill player if it falls off
-		if(_cc.transform.position.y < -20) PlayerKill();
+		if(_cc.transform.position.y < -20) GameObject.Find("GameManager").GetComponent<GameManager>().DeathMsg("thinking you could fly");
 		
 		// If key for map is held, show overview camera
 		if (Input.GetButton("Map"))
@@ -103,11 +103,6 @@ public class PlayerController : MonoBehaviour {
 		
 	}
 
-	public void PlayerKill()
-	{
-		_cc.transform.position = Vector3.zero;
-	}
-
 	private void OnTriggerEnter(Collider other)
 	{
 		if (other.GetComponent<Switch>())
@@ -131,7 +126,7 @@ public class PlayerController : MonoBehaviour {
 			GameObject.Find("OnPickup").GetComponent<Animator>().Play("Pickup", -1, 0f);
 		} else if (other.GetComponent<Spikes>())
 		{
-			PlayerKill();
+			GameObject.Find("GameManager").GetComponent<GameManager>().DeathMsg("in a prickly pit of pointy spikes");
 		} else if (other.GetComponent<Door>())
 		{
 			
