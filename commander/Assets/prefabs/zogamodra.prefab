@@ -24,7 +24,9 @@ GameObject:
   - component: {fileID: 95431334050301030}
   - component: {fileID: 54486051618187210}
   - component: {fileID: 135751353246133836}
+  - component: {fileID: 135049863840575750}
   - component: {fileID: 114607891541400342}
+  - component: {fileID: 114380128038911982}
   m_Layer: 0
   m_Name: zogamodra
   m_TagString: Untagged
@@ -39,7 +41,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1203993046574928}
   m_LocalRotation: {x: 0, y: 0.7071068, z: 0.7071068, w: 0}
-  m_LocalPosition: {x: 1.3691404, y: -10.048903, z: 191.84045}
+  m_LocalPosition: {x: 0.46986556, y: -1.0489005, z: 5.3178344}
   m_LocalScale: {x: 0.7463215, y: 0.7463215, z: 0.7463215}
   m_Children: []
   m_Father: {fileID: 0}
@@ -120,6 +122,17 @@ Animator:
   m_WarningMessage: 
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
+--- !u!114 &114380128038911982
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1203993046574928}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1063941e14a96e049b1154a540e9f8a9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!114 &114607891541400342
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -134,7 +147,7 @@ MonoBehaviour:
   player: {fileID: 0}
   speed: 4
   detectionRange: 8
---- !u!135 &135751353246133836
+--- !u!135 &135049863840575750
 SphereCollider:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
@@ -144,5 +157,17 @@ SphereCollider:
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Radius: 1.2743767
+  m_Radius: 1.174377
+  m_Center: {x: 0.007793013, y: 0, z: 0}
+--- !u!135 &135751353246133836
+SphereCollider:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1203993046574928}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Radius: 1.284377
   m_Center: {x: 0.007793013, y: 0, z: 0}
