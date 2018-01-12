@@ -1,5 +1,8 @@
 # Commander-unity
 
+## Latest build
+Zadnji WebGl build je na voljo v mapi `buildkeen15_web`
+
 ## Delo na projektu
 
 Uspelo mi je pofixat ne-commitanje metapodatkov: ko prvič pullaš repo in odpreš v Unityu, bo Unity izvedel neke importe in inicializacije ipd., ko se odpre bi moral projekt delat ok!
