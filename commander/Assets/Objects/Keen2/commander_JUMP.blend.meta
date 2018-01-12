@@ -134,7 +134,7 @@ ModelImporter:
     - serializedVersion: 16
       name: KeenJumpIn
       takeName: Default Take
-      firstFrame: 0
+      firstFrame: 8.2
       lastFrame: 15.800001
       wrapMode: 0
       orientationOffsetY: 0

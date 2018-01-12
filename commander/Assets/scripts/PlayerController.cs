@@ -8,11 +8,15 @@ public class PlayerController : MonoBehaviour {
 	public float JumpForce = 15f;
 	public float Gravity = 6f;
 
+	public AudioClip JumpSound;
+	public AudioClip PickupSound;
+
 	private Vector3 _movement = Vector3.zero;
 
 	private CharacterController _cc;
 	private Camera _oc;
 	private Transform _po;
+	private AudioSource _as;
 
 	public int Score = 0;
 	public bool HasKey = false;
@@ -25,6 +29,7 @@ public class PlayerController : MonoBehaviour {
         _cc = GetComponent<CharacterController> ();
 		_po = transform.Find("PlayerObject");
 		_oc = transform.Find("OverviewCamera").GetComponent<Camera>();
+		_as = GetComponent<AudioSource>();
 		_anim = _po.GetComponent<Animator>();
 	}
 
@@ -84,7 +89,7 @@ public class PlayerController : MonoBehaviour {
 			if (Input.GetButton("Jump"))
 			{
 				_anim.SetTrigger("Jump");
-
+				_as.PlayOneShot(JumpSound);
 				_movement.y = JumpForce;
 			}
 		}
@@ -112,6 +117,7 @@ public class PlayerController : MonoBehaviour {
 		} else if (other.GetComponent<Pickup>())
 		{
 			other.gameObject.SetActive(false);
+			_as.PlayOneShot(PickupSound);
 			int giveScore = other.GetComponent<Pickup>().ScoreAmount;
 			Score += giveScore;
 			GameObject.Find("Score").GetComponent<Score>().setScore(Score);
@@ -121,6 +127,7 @@ public class PlayerController : MonoBehaviour {
 		{
 			HasKey = true;
 			other.gameObject.SetActive(false);
+			_as.PlayOneShot(PickupSound);
 			GameObject.Find("HasKeyUI").GetComponent<Animator>().Play("HasKey");
 			GameObject.Find("OnPickup").GetComponent<Text>().text = "Found the Key";
 			GameObject.Find("OnPickup").GetComponent<Animator>().Play("Pickup", -1, 0f);
@@ -142,7 +149,7 @@ public class PlayerController : MonoBehaviour {
 		}
 		else if (other.GetComponent<ZogaModraController>())
 		{
-			GameObject.Find("GameManager").GetComponent<GameManager>().DeathMsg("by a nasty case of blue balls");
+			GameObject.Find("GameManager").GetComponent<GameManager>().DeathMsg("rolled over by a nasty blue ball");
 		}
 	}
 
