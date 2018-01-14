@@ -313,7 +313,7 @@ Transform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 51989852}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -53.893307, y: -18.855995, z: -6.232213}
+  m_LocalPosition: {x: -41.5, y: -18.855995, z: -6.232213}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 1403259171}
@@ -850,7 +850,7 @@ Transform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 134558903}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: 0, y: 0, z: 24.7}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 1232494165}
@@ -874,7 +874,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   player: {fileID: 437066577}
-  backgroudSize: 35.76
+  BackgroudSize: 35.5
 --- !u!4 &134903311 stripped
 Transform:
   m_PrefabParentObject: {fileID: 4900469997223204, guid: 0192c85d0f76af84c92dd069110a3bc4,
@@ -5580,6 +5580,30 @@ Prefab:
       propertyPath: JumpSound
       value: 
       objectReference: {fileID: 8300000, guid: 9fa565ece9f31c441808df76f935d9d4, type: 3}
+    - target: {fileID: 143495302367591118, guid: e0d0faa874710d644b62a041ece88e23,
+        type: 2}
+      propertyPath: m_Height
+      value: 8.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 1344896478419052, guid: e0d0faa874710d644b62a041ece88e23, type: 2}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 114603333265113874, guid: e0d0faa874710d644b62a041ece88e23,
+        type: 2}
+      propertyPath: TurnOnSound
+      value: 
+      objectReference: {fileID: 8300000, guid: 1b4645fe805c0c143bb5132d80ad72ab, type: 3}
+    - target: {fileID: 114603333265113874, guid: e0d0faa874710d644b62a041ece88e23,
+        type: 2}
+      propertyPath: TurnOffSound
+      value: 
+      objectReference: {fileID: 8300000, guid: 13b0bb45b8c2f174a9986a1dd75fe62a, type: 3}
+    - target: {fileID: 114603333265113874, guid: e0d0faa874710d644b62a041ece88e23,
+        type: 2}
+      propertyPath: JumpForce
+      value: 14
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: e0d0faa874710d644b62a041ece88e23, type: 2}
   m_IsPrefabParent: 0
@@ -7659,7 +7683,7 @@ Transform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1403259170}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 18.103306, y: -33.744003, z: -1.3377872}
+  m_LocalPosition: {x: 18.103306, y: -33.744003, z: 147}
   m_LocalScale: {x: 1, y: 100, z: 608.57}
   m_Children: []
   m_Father: {fileID: 51989853}

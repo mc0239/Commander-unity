@@ -10,6 +10,8 @@ public class PlayerController : MonoBehaviour {
 
 	public AudioClip JumpSound;
 	public AudioClip PickupSound;
+	public AudioClip TurnOnSound;
+	public AudioClip TurnOffSound;
 
 	private Vector3 _movement = Vector3.zero;
 
@@ -17,6 +19,10 @@ public class PlayerController : MonoBehaviour {
 	private Camera _oc;
 	private Transform _po;
 	private AudioSource _as;
+
+	private GameManager _gameManager;
+
+	private GameObject _uiOnPickup;
 
 	public int Score = 0;
 	public bool HasKey = false;
@@ -31,14 +37,20 @@ public class PlayerController : MonoBehaviour {
 		_oc = transform.Find("OverviewCamera").GetComponent<Camera>();
 		_as = GetComponent<AudioSource>();
 		_anim = _po.GetComponent<Animator>();
+		_gameManager = GameObject.Find("GameManager").GetComponent<GameManager>();
+		_uiOnPickup = GameObject.Find("OnPickup");
+	}
+
+	private void FixedUpdate()
+	{
+		MovePlayer();
 	}
 
 	// Update is called once per frame
 	void Update ()
 	{
-		MovePlayer();
 		// Kill player if it falls off
-		if(_cc.transform.position.y < -20) GameObject.Find("GameManager").GetComponent<GameManager>().DeathMsg("thinking you could fly");
+		if(_cc.transform.position.y < -20) _gameManager.DeathMsg("falling off into an endless pit");
 		
 		// If key for map is held, show overview camera
 		if (Input.GetButton("Map"))
@@ -49,7 +61,6 @@ public class PlayerController : MonoBehaviour {
 		{
 			_oc.enabled = false;
 		}
-		
 	}
 	
 	private Vector3 handleKeyInput()
@@ -113,7 +124,9 @@ public class PlayerController : MonoBehaviour {
 		if (other.GetComponent<Switch>())
 		{
 			Switch s = other.GetComponent<Switch>();
-			s.TurnSwitch();
+			bool newState = s.TurnSwitch();
+			if(newState) _as.PlayOneShot(TurnOnSound);
+			else _as.PlayOneShot(TurnOffSound);
 		} else if (other.GetComponent<Pickup>())
 		{
 			other.gameObject.SetActive(false);
@@ -121,19 +134,19 @@ public class PlayerController : MonoBehaviour {
 			int giveScore = other.GetComponent<Pickup>().ScoreAmount;
 			Score += giveScore;
 			GameObject.Find("Score").GetComponent<Score>().setScore(Score);
-			GameObject.Find("OnPickup").GetComponent<Text>().text = "+" + giveScore;
-			GameObject.Find("OnPickup").GetComponent<Animator>().Play("Pickup", -1, 0f);
+			_uiOnPickup.GetComponent<Text>().text = "+" + giveScore;
+			_uiOnPickup.GetComponent<Animator>().Play("Pickup", -1, 0f);
 		} else if (other.GetComponent<Key>())
 		{
 			HasKey = true;
 			other.gameObject.SetActive(false);
 			_as.PlayOneShot(PickupSound);
 			GameObject.Find("HasKeyUI").GetComponent<Animator>().Play("HasKey");
-			GameObject.Find("OnPickup").GetComponent<Text>().text = "Found the Key";
-			GameObject.Find("OnPickup").GetComponent<Animator>().Play("Pickup", -1, 0f);
+			_uiOnPickup.GetComponent<Text>().text = "Found the Key";
+			_uiOnPickup.GetComponent<Animator>().Play("Pickup", -1, 0f);
 		} else if (other.GetComponent<Spikes>())
 		{
-			GameObject.Find("GameManager").GetComponent<GameManager>().DeathMsg("in a prickly pit of pointy spikes");
+			_gameManager.DeathMsg("in a prickly pit of pointy spikes");
 		} else if (other.GetComponent<Door>())
 		{
 			if (HasKey)
@@ -143,18 +156,18 @@ public class PlayerController : MonoBehaviour {
 			}
 			else
 			{
-				GameObject.Find("OnPickup").GetComponent<Text>().text = "You don't have the Key";
-				GameObject.Find("OnPickup").GetComponent<Animator>().Play("Pickup", -1, 0f);
+				_uiOnPickup.GetComponent<Text>().text = "You don't have the Key";
+				_uiOnPickup.GetComponent<Animator>().Play("Pickup", -1, 0f);
 			}
 		}
 		else if (other.GetComponent<ZogaModraController>())
 		{
-			GameObject.Find("GameManager").GetComponent<GameManager>().DeathMsg("rolled over by a nasty blue ball");
+			_gameManager.DeathMsg("rolled over by a nasty blue ball");
 		}
 	}
 
 	private void EndGame()
 	{
-		GameObject.Find("GameManager").GetComponent<GameManager>().WinMsg();
+		_gameManager.WinMsg();
 	}
 }

@@ -20,10 +20,11 @@ public class Switch : MonoBehaviour
 		SetState(SwitchState);
 	}
 
-	public void TurnSwitch()
+	public bool TurnSwitch()
 	{
 		SwitchState = !SwitchState;
 		SetState(SwitchState);
+		return SwitchState;
 	}
 
 	private void SetState(bool state)
