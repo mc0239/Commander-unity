@@ -1,21 +1,35 @@
 ﻿using UnityEngine;
 using UnityEngine.SceneManagement;
+using UnityEngine.UI;
 
-public class Menu : MonoBehaviour {
+public class Menu : MonoBehaviour
+{
+	public GameObject Controls;
+	public GameObject Credits;
 
 	public void StartGame()
 	{
 		SceneManager.LoadScene("level_1");
 	}
 	
-	public void Controls()
+	public void ControlsOn()
 	{
-		SceneManager.LoadScene("controls");
+		Controls.SetActive(true);
 	}
 	
-	public void Credits()
+	public void ControlsOff()
 	{
-		SceneManager.LoadScene("credits");
+		Controls.SetActive(false);
+	}
+	
+	public void CreditsOn()
+	{
+		Credits.SetActive(true);
+	}
+	
+	public void CreditsOff()
+	{
+		Credits.SetActive(false);
 	}
 
 	public void Quit()
